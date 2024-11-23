@@ -82,9 +82,10 @@ const [selectedCategory, setSelectedCategory] = useState(null); // Danh mục đ
           .map(([field, messages]) => `${field}: ${messages.join(", ")}`)
           .join("\n");
         alert("Error adding product:\n" + errorMessages);
+        
       } else {
         console.error("Error:", error.message);
-        alert("Failed to add product. Please try again.");
+        alert(" Add productvariant.");
       }
     }
   };

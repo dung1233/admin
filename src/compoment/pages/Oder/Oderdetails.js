@@ -82,6 +82,7 @@ const Oderdetails = () => {
             );
             alert('Order status updated to Prepare.');
             setCustOrder((prev) => ({ ...prev, status: "Prepare" })); // Cập nhật trạng thái trong state
+            
         } catch (error) {
             console.error('Error updating order to Prepare:', error);
             alert('Failed to update order status to Prepare.');
@@ -230,7 +231,7 @@ const Oderdetails = () => {
                                         <div className="card-header d-flex justify-content-between align-items-center">
                                             <h5 className="card-title m-0">Order details</h5>
                                             <h6 className="m-0">
-                                                <a href=" javascript:void(0)">Edit</a>
+                                                <a href=" javascript:void(0)"></a>
                                             </h6>
                                         </div>
                                         <div className="card-datatable table-responsive">
@@ -466,7 +467,7 @@ const Oderdetails = () => {
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#editUser"
                                                     >
-                                                        Edit
+                                                        
                                                     </a>
                                                 </h6>
                                             </div>
@@ -483,7 +484,7 @@ const Oderdetails = () => {
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#addNewAddress"
                                                 >
-                                                    Edit
+                                                    
                                                 </a>
                                             </h6>
                                         </div>
@@ -505,7 +506,7 @@ const Oderdetails = () => {
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#addNewAddress"
                                                 >
-                                                    Edit
+                                                    
                                                 </a>
                                             </h6>
                                         </div>

@@ -428,9 +428,9 @@ const Commerce = () => {
                                                                 <div
                                                                     id="apexcharts90pj98cf"
                                                                     className="apexcharts-canvas apexcharts90pj98cf apexcharts-theme-light"
-                                                                    style={{ width: 180, height: 300 }}
+                                                                    style={{ width: 300, height: 300 }}
                                                                 >
-                                                                    <h3>Total Status</h3>
+                                                                    <h3>Total Order</h3>
 
                                                                     <div>
                                                                         <div>
@@ -2354,7 +2354,7 @@ const Commerce = () => {
                                                 <div className="col-md-4">
                                                     <div className="card-header d-flex justify-content-between">
                                                         <div>
-                                                            <h5 className="card-title mb-1">Report</h5>
+                                                            <h5 className="card-title mb-1">Favorite Food</h5>
 
                                                         </div>
                                                         <div className="dropdown">

@@ -1,47 +1,59 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../pages/Login/AuthContext'; // Import hook từ AuthContext
 
 const Home = () => {
   const menuRef = useRef(null);
-    
+
   // Thay đổi trạng thái ban đầu của isDashboardOpen từ localStorage (nếu có)
   const [isDashboardOpen, setDashboardOpen] = useState(() => {
-      const savedState = localStorage.getItem('isDashboardOpen');
-      return savedState === 'true'; // Chuyển đổi chuỗi sang boolean
+    const savedState = localStorage.getItem('isDashboardOpen');
+    return savedState === 'true'; // Chuyển đổi chuỗi sang boolean
   });
 
   // Hàm xử lý khi nhấn vào menu Dashboards
   const handleDashboardToggle = () => {
-      const newState = !isDashboardOpen;
-      setDashboardOpen(newState);
-      localStorage.setItem('isDashboardOpen', newState); // Lưu trạng thái vào localStorage
+    const newState = !isDashboardOpen;
+    setDashboardOpen(newState);
+    localStorage.setItem('isDashboardOpen', newState); // Lưu trạng thái vào localStorage
   };
 
   useEffect(() => {
-      const menuInner = menuRef.current;
+    const menuInner = menuRef.current;
 
-      // Kiểm tra nếu nội dung vượt quá chiều cao của container
+    // Kiểm tra nếu nội dung vượt quá chiều cao của container
+    if (menuInner.scrollHeight > menuInner.clientHeight) {
+      menuInner.style.overflowY = 'auto';
+    } else {
+      menuInner.style.overflowY = 'hidden';
+    }
+
+    // Xử lý lại khi kích thước cửa sổ thay đổi
+    const handleResize = () => {
       if (menuInner.scrollHeight > menuInner.clientHeight) {
-          menuInner.style.overflowY = 'auto';
+        menuInner.style.overflowY = 'auto';
       } else {
-          menuInner.style.overflowY = 'hidden';
+        menuInner.style.overflowY = 'hidden';
       }
+    };
 
-      // Xử lý lại khi kích thước cửa sổ thay đổi
-      const handleResize = () => {
-          if (menuInner.scrollHeight > menuInner.clientHeight) {
-              menuInner.style.overflowY = 'auto';
-          } else {
-              menuInner.style.overflowY = 'hidden';
-          }
-      };
+    window.addEventListener('resize', handleResize);
 
-      window.addEventListener('resize', handleResize);
-
-      // Cleanup event listener
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
+  //logout
+  const { logout } = useAuth(); // Hàm logout từ AuthContext
+  const navigate = useNavigate(); // Dùng để chuyển hướng
+
+  // Hàm xử lý khi người dùng nhấn nút Logout
+  const handleLogout = (e) => {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+    logout(); // Gọi hàm logout để xóa token và trạng thái đăng nhập
+    navigate('/login'); // Chuyển hướng người dùng tới trang Login
+  };
   return (
     <div>
       <div className="layout-wrapper layout-content-navbar">
@@ -168,7 +180,7 @@ const Home = () => {
                       className="menu-link"
                     >
                       <div className="text-truncate" data-i18n="Academy">
-                      Inventory Managemen
+                        Inventory Managemen
                       </div>
                     </a>
                   </li>
@@ -766,7 +778,7 @@ const Home = () => {
                                     </div>
                                 </a>
                             </li> */}
-                            
+
               <div className="ps__rail-x" style={{ left: 0, bottom: 0 }}>
                 <div className="ps__thumb-x" tabIndex={0} style={{ left: 0, width: 0 }} />
               </div>
@@ -878,7 +890,7 @@ const Home = () => {
                         <div className="dropdown-divider my-1" />
                       </li>
                       <li>
-                        <a className="dropdown-item" href="javascript:void(0);">
+                        <a className="dropdown-item" onClick={handleLogout} >
                           <i className="bx bx-power-off bx-md me-3" />
                           <span>Log Out</span>
                         </a>

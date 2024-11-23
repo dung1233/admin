@@ -8,6 +8,7 @@ import axios from 'axios';
 import 'chartjs-adapter-date-fns';
 
 
+import { useAuth } from '../pages/Login/AuthContext'; // Import hook từ AuthContext
 Chart.register(LineElement, PointElement, ArcElement, CategoryScale, LinearScale, TimeScale, Title, Tooltip, Legend);
 
 
@@ -95,6 +96,15 @@ const Layout = () => {
         };
 
     }, []);
+    const { logout } = useAuth(); // Hàm logout từ AuthContext
+  
+
+  // Hàm xử lý khi người dùng nhấn nút Logout
+  const handleLogout = (e) => {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+    logout(); // Gọi hàm logout để xóa token và trạng thái đăng nhập
+    navigate('/login'); // Chuyển hướng người dùng tới trang Login
+  };
     return (
         <div>
             <div className="layout-wrapper layout-content-navbar">
@@ -265,12 +275,12 @@ const Layout = () => {
                                 <li className={`menu-item ${menuState.Users ? 'open' : ''}`}>
                                     <a href="#" className="menu-link menu-toggle" onClick={(e) => { e.preventDefault(); handleMenuToggle('Users'); }}>
                                         <i class="menu-icon tf-icons bx bx-user"></i>
-                                        <div class="text-truncate" data-i18n="Users">Users</div>
+                                        <div class="text-truncate" data-i18n="Users">Login</div>
                                     </a>
                                     <ul class="menu-sub">
                                         <li class="menu-item active">
-                                            <a href="/Userlist" class="menu-link">
-                                                <div class="text-truncate" data-i18n="List">List</div>
+                                            <a  class="menu-link" onClick={handleLogout}>
+                                                <div class="text-truncate" data-i18n="List">Logout</div>
                                             </a>
                                         </li>
 
@@ -279,7 +289,7 @@ const Layout = () => {
                                                 <div class="text-truncate" data-i18n="View">View</div>
                                             </a>
                                             <ul class="menu-sub">
-                                                <li class="menu-item">
+                                                {/* <li class="menu-item">
                                                     <a href="/UserAc" class="menu-link">
                                                         <div class="text-truncate" data-i18n="Account">Account</div>
                                                     </a>
@@ -288,7 +298,7 @@ const Layout = () => {
                                                     <a href="/Invoice" class="menu-link">
                                                         <div class="text-truncate" data-i18n="Security">Invoice</div>
                                                     </a>
-                                                </li>
+                                                </li> */}
                                                 {/* <li class="menu-item">
                                                         <a href="app-user-view-billing.html" class="menu-link">
                                                             <div class="text-truncate" data-i18n="Billing &amp; Plans">Billing &amp; Plans</div>
