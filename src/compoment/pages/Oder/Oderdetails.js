@@ -491,15 +491,15 @@ const Oderdetails = () => {
                                         <div className="card-body">
                                             <p className="mb-0">
                                                 <br />
-                                                <p className=" mb-1">Tên Nhà Hàng: <td>{restaurantName}</td> </p>
-                                                <p className=" mb-1">Giờ Đặt: {custOrder?.eventTime || 'N/A'} </p>
-                                                UK
+                                                <p className=" mb-1">Restaurant: <td>{restaurantName}</td> </p>
+                                                <p className=" mb-1">Time: {custOrder?.eventTime || 'N/A'} </p>
+                                               
                                             </p>
                                         </div>
                                     </div>
                                     <div className="card mb-6">
                                         <div className="card-header d-flex justify-content-between pb-2">
-                                            <h5 className="card-title m-0">Bàn Đặt và Note </h5>
+                                            <h5 className="card-title m-0">Booking Table vs Note </h5>
                                             <h6 className="m-0">
                                                 <a
                                                     href=" javascript:void(0)"
